@@ -1,19 +1,22 @@
+#표준 라이브러리
 import random
-from fractions import Fraction
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import numpy as np
-import io
-from Dictionary.html_function import *
-import itertools
-from Dictionary.reference import *
-from itertools import combinations
 import math
 from math import gcd
 from fractions import Fraction
-import pandas as pd
-import random
+import itertools
+from itertools import combinations
 import sys
+import io
+
+# 외부 라이브러리
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+# 사용자 정의 모듈
+from Dictionary.html_function import *
+from Dictionary.reference import *
 
 sys.path.append('/home/aig2/directDownload/Middle/Grade1_1')
 # Reference class initialization
@@ -36,41 +39,47 @@ def save_svg_resize(ratio):
     return svg_data
 
 
+'''##############################
+
 # QSNO 101220
 
-import random
+'''##############################.
+
 from .refactory.intan_M112_07.Q_101220.calculations import *
 from .refactory.intan_M112_07.Q_101220.utils import *
 
-
 def intandrationalM112_Stem_07_001():
+   stem = "다음을 계산하시오.\n"
+   problem_type = random.choice(["정수-정수", "소수-소수", "분수-분수", "정수-소수", "정수-분수"])
+   exp, res, calc = None, None, None
 
-	
-    stem = "다음을 계산하시오.\n"
-    problem_type = random.choice(["정수-정수", "소수-소수", "분수-분수", "정수-소수", "정수-분수"])
-    
-    if problem_type == "정수-정수":
-        exp, res, calc = integer_integer_calculation()
-    elif problem_type == "소수-소수":
-        exp, res, calc = decimal_decimal_calculation()
-    elif problem_type == "분수-분수":
-        exp, res, calc = fraction_fraction_calculation_with_proper_parentheses_corrected()
-    elif problem_type == "정수-소수":
-        exp, res, calc = integer_decimal_calculation_modified()
-    elif problem_type == "정수-분수":
-        exp, res, calc = integer_fraction_calculation_with_multiplication()
-    stem += f"{exp}\n"
+   # 각 문제 유형별 계산 함수 실행
+   if problem_type == "정수-정수":
+       exp, res, calc = integer_integer_calculation()
+   elif problem_type == "소수-소수":
+       exp, res, calc = decimal_decimal_calculation()
+   elif problem_type == "분수-분수":
+       exp, res, calc = fraction_fraction_calculation_with_proper_parentheses_corrected()
+   elif problem_type == "정수-소수":
+       exp, res, calc = integer_decimal_calculation_modified()
+   else:  # 정수-분수
+       exp, res, calc = integer_fraction_calculation_with_multiplication()
 
-    answer = f"(정답) {res}\n"
-    comment = f"(해설) {calc}\n"
+   # LaTeX 포맷 적용
+   stem += f"{exp}\n"
+   answer = f"(정답) {res}\n"
+   comment = f"(해설) {calc}\n"
 
-    return stem, answer, comment
-
+   # 괄호 규칙이 적용된 결과 반환
+   return stem, answer, comment
 
 
+'''##############################
 
 # QSNO 101221
-import random
+
+'''##############################
+
 from .refactory.intan_M112_07.Q_101221.calculations import *
 from .refactory.intan_M112_07.Q_101221.utils import *
 
@@ -114,40 +123,44 @@ def intandrationalM112_Stem_07_002():
 
    return stem, answer, comment
 
+'''##############################
+
 # QSNO 101222
-import random
+
+'''##############################
+
 from .refactory.intan_M112_07.Q_101222.calculations import *
 from .refactory.intan_M112_07.Q_101222.utils import *
 
 def intandrationalM112_Stem_07_003(): #메인함수 문제
-   expr1, res1, correct_calc1, incorrect_calc1 = integer_integer_calculation()
-   expr2, res2, correct_calc2, incorrect_calc2 = decimal_decimal_calculation()
-   expr3, res3, correct_calc3, incorrect_calc3 = fraction_fraction_calculation_with_proper_parentheses_corrected()
+   expr1, res1, correct_calc1 = integer_integer_calculation()
+   expr2, res2, correct_calc2 = decimal_decimal_calculation()
+   expr3, res3, correct_calc3 = fraction_fraction_calculation_with_proper_parentheses_corrected()
    expr4, res4, correct_calc4 = integer_fraction_calculation_with_multiplication()
 
    options = [(expr1, res1, correct_calc1), (expr2, res2, correct_calc2), (expr3, res3, correct_calc3), (expr4, res4, correct_calc4)]
 
-   incorrect_expr1, incorrect_res1, incorrect_correct_calc1, incorrect_incorrect_calc1 = integer_integer_calculation()
-   incorrect_expr2, incorrect_res2, incorrect_correct_calc2, incorrect_incorrect_calc2 = decimal_decimal_calculation()
-   incorrect_expr3, incorrect_res3, incorrect_correct_calc3, incorrect_incorrect_calc3 = fraction_fraction_calculation_with_proper_parentheses_corrected()
+   incorrect_expr1, incorrect_res1, incorrect_correct_calc1 = integer_integer_calculation()
+   incorrect_expr2, incorrect_res2, incorrect_correct_calc2 = decimal_decimal_calculation()
+   incorrect_expr3, incorrect_res3, incorrect_correct_calc3 = fraction_fraction_calculation_with_proper_parentheses_corrected()
 
    incorrect_options = [
-       (incorrect_expr1, incorrect_res1, incorrect_correct_calc1, incorrect_incorrect_calc1),
-       (incorrect_expr2, incorrect_res2, incorrect_correct_calc2, incorrect_incorrect_calc2),
-       (incorrect_expr3, incorrect_res3, incorrect_correct_calc3, incorrect_incorrect_calc3)
+       (incorrect_expr1, incorrect_res1, incorrect_correct_calc1),
+       (incorrect_expr2, incorrect_res2, incorrect_correct_calc2),
+       (incorrect_expr3, incorrect_res3, incorrect_correct_calc3)
    ]
 
-   incorrect_expr, incorrect_res, correct_calc, incorrect_calc = random.choice(incorrect_options)
+   incorrect_expr, incorrect_res, correct_calc = random.choice(incorrect_options)
 
    random_index = random.randint(0, 4)
-   options.insert(random_index, (incorrect_expr, incorrect_res, correct_calc, incorrect_calc))
+   options.insert(random_index, (incorrect_expr, incorrect_res, correct_calc))
 
    labels = ['①', '②', '③', '④', '⑤']
    stem = "다음 중 옳지 않은 것은?\n"
    
    for i, (label, option) in enumerate(zip(labels, options)):
        if i == random_index:
-           stem += f"{label} {option[3]}\n"
+           stem += f"{label} {option[2]}\n"
        else:
            stem += f"{label} {option[0]} = {option[1]}\n"
 
@@ -158,9 +171,12 @@ def intandrationalM112_Stem_07_003(): #메인함수 문제
 
    return stem, answer, comment
 
+'''##############################
+
 # QSNO 101223 
-import random
-from itertools import combinations
+
+'''##############################
+
 from .refactory.intan_M112_07.Q_101223.calculations import *
 from .refactory.intan_M112_07.Q_101223.utils import *
 
@@ -211,9 +227,12 @@ def intandrationalM112_Stem_07_004():
 
     return stem, answer, comment
 
+'''##############################
 
 # QSNO 101224
-import random
+
+'''##############################
+
 from .refactory.intan_M112_07.Q_101224.calculations import *
 from .refactory.intan_M112_07.Q_101224.utils import *
 
@@ -253,10 +272,13 @@ def intandrationalM112_Stem_07_005():
    return stem, answer, comment
 
 
+'''##############################
 
 # Q 101225
 # 보인 변경 (24/12/11) - [메모] 수정 사항 많아서, 우선 서비스 제외
-import random
+
+'''##############################
+
 from .refactory.intan_M112_07.Q_101225.calculations import *
 from .refactory.intan_M112_07.Q_101225.utils import *
 
@@ -292,11 +314,14 @@ def intandrationalM112_Stem_07_006():
 
    return stem, answer, comment
 
-
+'''##############################
 
 # QSNO 101226
-import random
-from .refactory.intan_M112_07.Q_101226.utils import generate_expression
+
+'''##############################
+
+from .refactory.intan_M112_07.Q_101226.calculations import *
+from .refactory.intan_M112_07.Q_101226.utils import *
 
 def intandrationalM112_Stem_07_007():
    correct_num1, correct_num2, correct_expr, correct_result = None, None, None, None
@@ -331,10 +356,14 @@ def intandrationalM112_Stem_07_007():
 
    return stem, answer, comment
 
+'''##############################
 
 # QSNO 101227
 
-import random
+'''##############################
+
+
+from .refactory.intan_M112_07.Q_101227.calculations import *
 from .refactory.intan_M112_07.Q_101227.utils import *
 
 def intandrationalM112_Stem_07_008():
@@ -361,11 +390,14 @@ def intandrationalM112_Stem_07_008():
 
    return stem, answer, comment
 
-
+'''##############################
 
 # QSNO 101228
+
+'''##############################
+
+from .refactory.intan_M112_07.Q_101228.calculations import *
 from .refactory.intan_M112_07.Q_101228.utils import *
-import random
 
 def intandrationalM112_Stem_07_009():
    ref.places()
@@ -402,9 +434,12 @@ def intandrationalM112_Stem_07_009():
 
 
 
+'''##############################
 
-# 문항 오류: 문항 교체 후, 검수파일 제출 시 생성하여 제출하겠습니다.
 # QSNO 101229
+
+'''##############################
+
 def intandrationalM112_Stem_07_010():
 
 	# 문제
